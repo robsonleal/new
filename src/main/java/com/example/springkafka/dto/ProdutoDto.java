@@ -14,8 +14,8 @@ public class ProdutoDto {
     private Long codigo;
     private String nome;
 
-    public ProdutoDto(Produto produto) {
-        codigo = produto.getCodigo();
-        nome = produto.getNome();
+    public ProdutoDto(Produto entity) {
+        codigo = entity.getCodigo();
+        nome = entity.getNome();
     }
 }

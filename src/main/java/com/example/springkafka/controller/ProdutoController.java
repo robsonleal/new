@@ -37,14 +37,14 @@ public class ProdutoController {
 
     @GetMapping
     public ResponseEntity<List<ProdutoDto>> listarTodos() {
-        List<ProdutoDto> dtos = service.listarTodos();
+        List<ProdutoDto> list = service.listarTodos();
 
-        return ResponseEntity.ok(dtos);
+        return ResponseEntity.ok(list);
     }
 
     @GetMapping(value = "/{codigo}")
-    public ResponseEntity<ProdutoDto> buscarPeloCodigo(@PathVariable(name = "codigo") Long codigo) {
-        ProdutoDto dtoEncontrado = service.buscarPeloCodigo(codigo);
+    public ResponseEntity<ProdutoDto> buscarPeloId(@PathVariable(name = "codigo") Long codigo) {
+        ProdutoDto dtoEncontrado = service.buscarPeloId(codigo);
 
         return ResponseEntity.ok(dtoEncontrado);
     }

@@ -20,9 +20,9 @@ public class ProdutoService {
 
     public ProdutoDto cadastrar(ProdutoDto dto) {
         repository.findById(dto.getCodigo())
-            .ifPresent(
-                x -> { throw new IllegalArgumentException("Produto já existe!"); }
-            );
+            .ifPresent( x -> {
+                throw new IllegalArgumentException("Produto com id '" + dto.getCodigo() + "' já cadastrado!");
+            });
 
         Produto entity = new Produto();
         BeanUtils.copyProperties(dto, entity);
@@ -36,9 +36,9 @@ public class ProdutoService {
         return list.stream().map(ProdutoDto::new).collect(Collectors.toList());
     }
 
-    public ProdutoDto buscarPeloCodigo(Long codigo) {
+    public ProdutoDto buscarPeloId(Long codigo) {
         return new ProdutoDto(repository.findById(codigo).orElseThrow(
-            () -> new ResourceNotFoundException("Produto não encontrado!")
+            () -> new ResourceNotFoundException("Produto  com id '" + codigo + "' não encontrado!")
         ));
     }
 }

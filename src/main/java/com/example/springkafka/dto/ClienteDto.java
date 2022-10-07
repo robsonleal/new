@@ -11,11 +11,11 @@ import lombok.ToString;
 @Getter @Setter @ToString @EqualsAndHashCode
 @AllArgsConstructor @NoArgsConstructor
 public class ClienteDto {
-    private Long codigoCliente;
-    private String nomeCliente;
+    private Long codigo;
+    private String nome;
 
-    public ClienteDto(Cliente cliente) {
-        codigoCliente = cliente.getCodigoCliente();
-        nomeCliente = cliente.getNomeCliente();
+    public ClienteDto(Cliente entity) {
+        codigo = entity.getCodigo();
+        nome = entity.getNome();
     }
 }

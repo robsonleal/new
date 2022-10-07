@@ -23,29 +23,29 @@ public class ClienteController {
     private ClienteService service;
 
     @PostMapping
-    public ResponseEntity<ClienteDto> cadastrarCliente(@RequestBody ClienteDto clienteDto) {
-        ClienteDto novoCliente = service.cadastrarCliente(clienteDto);
+    public ResponseEntity<ClienteDto> cadastrar(@RequestBody ClienteDto dto) {
+        ClienteDto novoDto = service.cadastrar(dto);
 
         URI uri = ServletUriComponentsBuilder
                     .fromCurrentRequest()
                     .path("/{codCliente}")
-                    .buildAndExpand(novoCliente.getCodigoCliente())
+                    .buildAndExpand(novoDto.getCodigo())
                     .toUri();
 
-        return ResponseEntity.created(uri).body(novoCliente);
+        return ResponseEntity.created(uri).body(novoDto);
     }
 
     @GetMapping
-    public ResponseEntity<List<ClienteDto>> listarTodosOsClientes() {
-        List<ClienteDto> clientes = service.listarTodosClientes();
+    public ResponseEntity<List<ClienteDto>> listarTodos() {
+        List<ClienteDto> list = service.listarTodos();
 
-        return ResponseEntity.ok(clientes);
+        return ResponseEntity.ok(list);
     }
 
-    @GetMapping(value = "/{codCliente}")
-    public ResponseEntity<ClienteDto> buscarClientePeloCodigo(@PathVariable(name = "codCliente") Long codCliente) {
-        ClienteDto cliente = service.buscarClientePeloCodigo(codCliente);
+    @GetMapping(value = "/{codigo}")
+    public ResponseEntity<ClienteDto> buscarPeloId(@PathVariable(name = "codigo") Long codigo) {
+        ClienteDto dto = service.buscarPeloId(codigo);
 
-        return ResponseEntity.ok(cliente);
+        return ResponseEntity.ok(dto);
     }
 }
